@@ -18,7 +18,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class RecordingSerializer(serializers.ModelSerializer):
     owner = serializers.SlugRelatedField(queryset=User.objects.all(),slug_field='name')
-
     class Meta:
         model = Recordings
-        fields = ('url', 'owner', 'created', 'datafile')
+        fields = ('url', 'owner', 'created', 'datafile', 'result')

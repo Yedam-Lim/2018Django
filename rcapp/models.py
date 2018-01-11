@@ -3,7 +3,9 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from rcapp.algorithm import algo
 from rest_framework.authtoken.models import Token
+
 
 class User(AbstractUser):
     username = models.EmailField(unique=True, null=False, max_length=254)
@@ -17,3 +19,7 @@ class Recordings(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, related_name='name', on_delete=models.CASCADE)
     datafile = models.FileField(upload_to='uploads/%Y/%m/%d/')
+    result = models.CharField(max_length=200, blank=True, default='()')
+
+    def create_result():
+        self.result = str(algo.evaluate(self.datafile))
